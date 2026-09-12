@@ -1,4 +1,4 @@
-package com.smzk.deliveryservicecommon.util;
+package com.smzk.deliveryservicecommon.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -6,7 +6,6 @@ import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.Currency;
 import java.util.Date;
 import java.util.Map;
 
@@ -15,16 +14,6 @@ public class JwtUtil {
     private static final String SECRET_STRING = "c2RmamtkZmpsa2RmamFsa2ZkamZsa2RmamFsa2ZkamZsa2RmamFsa2ZkamZsa2Zk";
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(SECRET_STRING.getBytes(StandardCharsets.UTF_8));
     private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000L;
-
-    /**
-     * 生成 Token（默认过期时间）
-     *
-     * @param subject  主题（通常为用户名或用户 ID）
-     * @param extraClaims 自定义业务荷载（如角色、权限等）
-     */
-    public static String generateToken(String subject, Map<String, Object> extraClaims) {
-        return generateToken(subject, extraClaims, EXPIRATION_TIME);
-    }
 
     /**
      * 生成 Token（支持自定义过期时间）

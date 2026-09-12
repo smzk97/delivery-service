@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler
-    public Result globalException(Exception e){
-        log.error("程序出错",e);
-        return Result.Failed(e.toString());
+    public Result handlerBusinessException(BusinessException e){
+        log.error("业务异常",e);
+        return Result.Failed(e.getMessage());
     }
 
 }
