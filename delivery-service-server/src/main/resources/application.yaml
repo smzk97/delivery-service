@@ -26,3 +26,7 @@ spring:
     enable: true
     setting:
       language: zh_cn
+  mybatis-plus:
+    global-config:
+      db-config:
+        id-type: AUTO
