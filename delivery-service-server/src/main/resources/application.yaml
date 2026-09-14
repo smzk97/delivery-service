@@ -9,7 +9,7 @@ spring:
     file:
       name: ./app.log
 
-  # springdoc-openapi项目配置
+# springdoc-openapi项目配置
   springdoc:
     swagger-ui:
       path: /swagger-ui.html
@@ -30,3 +30,6 @@ spring:
     global-config:
       db-config:
         id-type: AUTO
+
+mybatis-plus:
+  mapper-locations: classpath:CurdXml/*.xml

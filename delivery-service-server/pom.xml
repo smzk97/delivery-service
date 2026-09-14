@@ -56,6 +56,18 @@
             <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
             <version>3.5.17</version>
         </dependency>
+        <!-- MP 3.5.9+ 分页拦截器所需，starter 中为 optional 不会传递 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser-4.9</artifactId>
+            <version>3.5.17</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
