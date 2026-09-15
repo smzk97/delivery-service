@@ -1,9 +1,7 @@
 package com.smzk.delivery_service.service;
 
 import com.baomidou.mybatisplus.spring.service.IService;
-import com.smzk.delivery_service.dto.EmployeeInsertDTO;
-import com.smzk.delivery_service.dto.EmployeeLoginDTO;
-import com.smzk.delivery_service.dto.EmployeeQueryPageDTO;
+import com.smzk.delivery_service.dto.*;
 import com.smzk.delivery_service.entity.Employee;
 import com.smzk.delivery_service.entity.Result;
 import com.smzk.delivery_service.vo.PageResultVO;
@@ -16,4 +14,5 @@ public interface EmployeeService extends IService<Employee> {
     void employeeConvertStatus(Integer status,Integer id);
     Employee employeeQueryById(Integer id);
     void employeeUpdate(EmployeeInsertDTO employeeInsertDTO);
+    void employeeEditPassword(EmployeeEditPasswordDTO employeeEditPasswordDTO);
 }

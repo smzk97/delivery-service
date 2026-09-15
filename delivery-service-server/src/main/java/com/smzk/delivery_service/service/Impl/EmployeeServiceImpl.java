@@ -6,9 +6,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
-import com.smzk.delivery_service.dto.EmployeeInsertDTO;
-import com.smzk.delivery_service.dto.EmployeeLoginDTO;
-import com.smzk.delivery_service.dto.EmployeeQueryPageDTO;
+import com.smzk.delivery_service.dto.*;
+import com.smzk.delivery_service.entity.Category;
 import com.smzk.delivery_service.entity.Employee;
 import com.smzk.delivery_service.entity.Result;
 import com.smzk.delivery_service.enums.ErrorCode;
@@ -49,7 +48,7 @@ public class EmployeeServiceImpl extends ServiceImpl<BaseMapper<Employee>,Employ
                 .allEq(Map.of(Employee::getUserName,employeeLoginDTO.getUserName(),Employee::getPassWord, employeeLoginDTO.getPassWord()));
         Employee employeeData = employeeMapper.selectOne(lambdaQueryWrapper);
         if(employeeData == null){
-            throw new BusinessException(ErrorCode.UNAUTHORIZED,"用户或密码错误");
+            throw new BusinessException(ErrorCode.UNAUTHORIZED,"用户名或密码错误");
         }
         if(!employeeData.getStatus().equals(NORMAL.getNum())){
             throw new BusinessException(ErrorCode.LOCK);
@@ -123,6 +122,24 @@ public class EmployeeServiceImpl extends ServiceImpl<BaseMapper<Employee>,Employ
                 .build();
         BeanUtils.copyProperties(employeeInsertDTO,employee);
         this.update(employee,new LambdaUpdateWrapper<Employee>().eq(Employee::getId,employeeInsertDTO.getId()));
+    }
+
+    @Override
+    public void employeeEditPassword(EmployeeEditPasswordDTO employeeEditPasswordDTO) {
+        String recentPassword = this.employeeQueryById(employeeEditPasswordDTO.getEmpId()).getPassWord();
+        if(!recentPassword.equals(employeeEditPasswordDTO.getOldPassword())){
+            throw new BusinessException(ErrorCode.UNAUTHORIZED,"旧密码错误");
+        }
+        if(recentPassword.equals(employeeEditPasswordDTO.getNewPassword())){
+            throw new BusinessException(ErrorCode.UNAUTHORIZED,"旧密码与新密码一致");
+        }
+        Employee employee = Employee.builder()
+                .updateTime(LocalDateTime.now())
+                .passWord(employeeEditPasswordDTO.getNewPassword())
+                .id(employeeEditPasswordDTO.getEmpId())
+                .updateUser(ThreadLocalUtils.getEmployee().getId())
+                .build();
+        this.update(employee,new LambdaUpdateWrapper<Employee>().eq(Employee::getId,employeeEditPasswordDTO.getEmpId()));
     }
 
 }

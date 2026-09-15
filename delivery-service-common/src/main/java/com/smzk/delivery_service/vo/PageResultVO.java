@@ -12,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 public class PageResultVO {
     private long total;
-    private List<Employee> result;
+    private List<?> result;
 }

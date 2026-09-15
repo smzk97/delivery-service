@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.smzk.delivery_service.dto.EmployeeEditPasswordDTO;
 import com.smzk.delivery_service.dto.EmployeeInsertDTO;
 import com.smzk.delivery_service.dto.EmployeeLoginDTO;
 import com.smzk.delivery_service.dto.EmployeeQueryPageDTO;
@@ -72,4 +73,11 @@ public class EmployeeController {
         employeeService.employeeUpdate(employeeInsertDTO);
         return Result.Success();
     }
+
+    @PutMapping("/editPassword")
+    public Result employeeEditPassword(@RequestBody EmployeeEditPasswordDTO employeeEditPasswordDTO){
+        employeeService.employeeEditPassword(employeeEditPasswordDTO);
+        return Result.Success();
+    }
+
 }
