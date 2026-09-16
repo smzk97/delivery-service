@@ -66,10 +66,6 @@ public class EmployeeServiceImpl extends ServiceImpl<BaseMapper<Employee>,Employ
     public void employeeInsert(EmployeeInsertDTO employeeInsertDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeInsertDTO,employee);
-        employee.setCreateUser(ThreadLocalUtils.getEmployee().getId());
-        employee.setUpdateUser(ThreadLocalUtils.getEmployee().getId());
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
         this.save(employee);
     }
 
@@ -116,10 +112,7 @@ public class EmployeeServiceImpl extends ServiceImpl<BaseMapper<Employee>,Employ
 
     @Override
     public void employeeUpdate(EmployeeInsertDTO employeeInsertDTO) {
-        Employee employee = Employee.builder()
-                .updateTime(LocalDateTime.now())
-                .createUser(ThreadLocalUtils.getEmployee().getId())
-                .build();
+        Employee employee = new Employee();
         BeanUtils.copyProperties(employeeInsertDTO,employee);
         this.update(employee,new LambdaUpdateWrapper<Employee>().eq(Employee::getId,employeeInsertDTO.getId()));
     }
@@ -134,10 +127,8 @@ public class EmployeeServiceImpl extends ServiceImpl<BaseMapper<Employee>,Employ
             throw new BusinessException(ErrorCode.UNAUTHORIZED,"旧密码与新密码一致");
         }
         Employee employee = Employee.builder()
-                .updateTime(LocalDateTime.now())
                 .passWord(employeeEditPasswordDTO.getNewPassword())
                 .id(employeeEditPasswordDTO.getEmpId())
-                .updateUser(ThreadLocalUtils.getEmployee().getId())
                 .build();
         this.update(employee,new LambdaUpdateWrapper<Employee>().eq(Employee::getId,employeeEditPasswordDTO.getEmpId()));
     }

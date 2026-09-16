@@ -38,10 +38,7 @@ public class CategoryServiceImpl extends ServiceImpl<BaseMapper<Category>,Catego
 
     @Override
     public void categoryUpdate(CategoryUpdateDTO categoryUpdateDTO) {
-        Category category = Category.builder()
-                        .updateTime(LocalDateTime.now())
-                        .updateUser(ThreadLocalUtils.getEmployee().getId())
-                        .build();
+        Category category = new Category();
         BeanUtils.copyProperties(categoryUpdateDTO,category);
         this.update(category,new LambdaUpdateWrapper<Category>().eq(Category::getId,categoryUpdateDTO.getId()));
     }
@@ -71,12 +68,7 @@ public class CategoryServiceImpl extends ServiceImpl<BaseMapper<Category>,Catego
 
     @Override
     public void categoryInsert(CategoryInsertDTO categoryInsertDTO) {
-        Category category = Category.builder()
-                .createUser(ThreadLocalUtils.getEmployee().getId())
-                .updateUser(ThreadLocalUtils.getEmployee().getId())
-                .createTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .build();
+        Category category = new Category();
         BeanUtils.copyProperties(categoryInsertDTO,category);
         this.save(category);
     }
