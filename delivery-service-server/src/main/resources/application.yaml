@@ -1,4 +1,7 @@
 spring:
+  profiles:
+    active:
+      - dev
   application:
     name: delivery-service-server
   datasource:
@@ -33,4 +36,5 @@ mybatis-plus:
   mapper-locations: classpath:CurdXml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 

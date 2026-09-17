@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
-public class JwtUtil {
+public class JwtUtils {
 
     private static final String SECRET_STRING = "c2RmamtkZmpsa2RmamFsa2ZkamZsa2RmamFsa2ZkamZsa2RmamFsa2ZkamZsa2Zk";
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(SECRET_STRING.getBytes(StandardCharsets.UTF_8));

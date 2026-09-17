@@ -1,0 +1,5 @@
+oss:
+  config:
+    endpoint:
+    bucket-name:
+    region:

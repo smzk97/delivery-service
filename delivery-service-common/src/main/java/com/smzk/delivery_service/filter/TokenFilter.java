@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smzk.delivery_service.entity.EmployeeThreadLocal;
 import com.smzk.delivery_service.entity.Result;
 import com.smzk.delivery_service.enums.ErrorCode;
-import com.smzk.delivery_service.utils.JwtUtil;
+import com.smzk.delivery_service.utils.JwtUtils;
 import com.smzk.delivery_service.utils.ThreadLocalUtils;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.annotation.WebFilter;
@@ -48,7 +48,7 @@ public class TokenFilter implements Filter {
             return;
         }
         try{
-            Claims claims = JwtUtil.parseToken(token);
+            Claims claims = JwtUtils.parseToken(token);
             EmployeeThreadLocal employeeThreadLocal = objectMapper.convertValue(claims, EmployeeThreadLocal.class);
             ThreadLocalUtils.setEmployee(employeeThreadLocal);
             chain.doFilter(request,response);
