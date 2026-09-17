@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.smzk.delivery_service.enums.AccountStatus.NORMAL;
-import static com.smzk.delivery_service.utils.JwtUtil.generateToken;
+import static com.smzk.delivery_service.utils.JwtUtils.generateToken;
 
 @Service
 public class EmployeeServiceImpl extends ServiceImpl<BaseMapper<Employee>,Employee> implements EmployeeService{

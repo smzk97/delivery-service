@@ -8,9 +8,9 @@ spring:
     url : "jdbc:mysql://localhost:3306/delivery_service"
     password : 123456
     username : root
-  logging:
-    file:
-      name: ./app.log
+logging:
+  file:
+    name: ./app.log
 
 # springdoc-openapi项目配置
 springdoc:
@@ -20,7 +20,7 @@ springdoc:
     operations-sorter: alpha
   api-docs:
     path: /v3/api-docs
-  group-configs:
+    group-configs:
       group: 'default'
       paths-to-match: '/**'
       packages-to-scan: com.smzk.deliveryserviceserver.controller

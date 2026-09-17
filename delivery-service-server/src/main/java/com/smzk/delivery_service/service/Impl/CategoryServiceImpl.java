@@ -13,7 +13,7 @@ import com.smzk.delivery_service.dto.CategoryUpdateDTO;
 import com.smzk.delivery_service.entity.Category;
 import com.smzk.delivery_service.mapper.CategoryMapper;
 import com.smzk.delivery_service.service.CategoryService;
-import com.smzk.delivery_service.utils.JwtUtil;
+import com.smzk.delivery_service.utils.JwtUtils;
 import com.smzk.delivery_service.utils.ThreadLocalUtils;
 import com.smzk.delivery_service.vo.PageResultVO;
 import lombok.extern.slf4j.Slf4j;

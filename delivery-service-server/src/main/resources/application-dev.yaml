@@ -1,5 +1,12 @@
 oss:
   config:
-    endpoint:
-    bucket-name:
-    region:
+    endpoint: "https://oss-cn-guangzhou.aliyuncs.com"
+    bucket-name: "delivery-service-smzk"
+    region: "cn-guangzhou"
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB       # 单个文件最大大小
+      max-request-size: 100MB   # 单次请求总数据大小
+      enabled: true
