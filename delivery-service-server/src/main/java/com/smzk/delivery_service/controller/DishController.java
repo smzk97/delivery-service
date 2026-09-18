@@ -27,7 +27,7 @@ public class DishController {
     }
 
     @DeleteMapping
-    public Result dishDelete(List<Integer> ids){
+    public Result dishDelete(@RequestParam List<Integer> ids){
         dishService.dishDelete(ids);
         return Result.Success();
     }

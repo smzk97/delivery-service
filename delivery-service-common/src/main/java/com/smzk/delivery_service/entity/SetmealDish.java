@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("setmeal")
+@TableName("setmeal_dish")
 public class SetmealDish {
     private Integer id;
     private Integer setmealId;

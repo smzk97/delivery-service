@@ -54,18 +54,18 @@ public class DishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implemen
         }
         List<Dish> dishes = this.listByIds(ids);
         if(dishes.isEmpty() || dishes.size() < ids.size()){
-            throw new BusinessException(ErrorCode.SUCCESS,"菜品不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND,"菜品不存在");
         }
         dishes.forEach(dish->{
             if(dish.getStatus().equals(1)){
-                throw new BusinessException(ErrorCode.SUCCESS,"菜品未下架");
+                throw new BusinessException(ErrorCode.BUSINESS_FAIL,"菜品未下架");
             }
         });
         List<SetmealDish> lists = Db.lambdaQuery(SetmealDish.class)
                 .in(SetmealDish::getDishId, ids)
                 .list();
-        if(lists != null){
-            throw new BusinessException(ErrorCode.SUCCESS,"菜品关联套餐");
+        if(!lists.isEmpty()){
+            throw new BusinessException(ErrorCode.BUSINESS_FAIL,"菜品关联套餐");
         }
         this.removeByIds(ids);
         LambdaQueryWrapper<DishFlavor> wrapper = Wrappers.lambdaQuery(DishFlavor.class)
