@@ -3,7 +3,7 @@ package com.smzk.delivery_service.controller;
 import com.smzk.delivery_service.dto.DishInsertDTO;
 import com.smzk.delivery_service.dto.DishQueryPageDTO;
 import com.smzk.delivery_service.entity.Dish;
-import com.smzk.delivery_service.entity.DishQueryByIdVO;
+import com.smzk.delivery_service.vo.DishQueryByIdVO;
 import com.smzk.delivery_service.entity.Result;
 import com.smzk.delivery_service.service.DishService;
 import com.smzk.delivery_service.vo.PageResultVO;

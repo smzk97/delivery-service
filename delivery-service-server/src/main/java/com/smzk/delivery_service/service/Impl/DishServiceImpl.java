@@ -14,6 +14,7 @@ import com.smzk.delivery_service.enums.ErrorCode;
 import com.smzk.delivery_service.exception.BusinessException;
 import com.smzk.delivery_service.mapper.DishMapper;
 import com.smzk.delivery_service.service.DishService;
+import com.smzk.delivery_service.vo.DishQueryByIdVO;
 import com.smzk.delivery_service.vo.PageResultVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

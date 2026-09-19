@@ -9,11 +9,9 @@ import com.baomidou.mybatisplus.spring.service.IService;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.smzk.delivery_service.dto.CategoryInsertDTO;
 import com.smzk.delivery_service.dto.CategoryQueryPageDTO;
-import com.smzk.delivery_service.dto.CategoryUpdateDTO;
 import com.smzk.delivery_service.entity.Category;
 import com.smzk.delivery_service.mapper.CategoryMapper;
 import com.smzk.delivery_service.service.CategoryService;
-import com.smzk.delivery_service.utils.JwtUtils;
 import com.smzk.delivery_service.utils.ThreadLocalUtils;
 import com.smzk.delivery_service.vo.PageResultVO;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +35,7 @@ public class CategoryServiceImpl extends ServiceImpl<BaseMapper<Category>,Catego
     }
 
     @Override
-    public void categoryUpdate(CategoryUpdateDTO categoryUpdateDTO) {
+    public void categoryUpdate(CategoryInsertDTO categoryUpdateDTO) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryUpdateDTO,category);
         this.update(category,new LambdaUpdateWrapper<Category>().eq(Category::getId,categoryUpdateDTO.getId()));

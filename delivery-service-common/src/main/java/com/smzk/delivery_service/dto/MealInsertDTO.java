@@ -1,0 +1,16 @@
+package com.smzk.delivery_service.dto;
+
+import com.smzk.delivery_service.entity.Setmeal;
+import com.smzk.delivery_service.entity.SetmealDish;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MealInsertDTO extends Setmeal {
+    private List<SetmealDish> setmealDishes;
+}

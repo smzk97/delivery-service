@@ -33,6 +33,9 @@ public class GlobalExceptionHandler {
         }else if(exactMessages.equals("employee.identify_number")){
             log.error("身份证号重复");
             return Result.Failed("身份证号重复");
+        }else if(exactMessages.equals("setmeal.name")){
+            log.info("套餐名称重复");
+            return Result.Failed("套餐名称重复");
         }
         return Result.Failed("未知错误");
     }

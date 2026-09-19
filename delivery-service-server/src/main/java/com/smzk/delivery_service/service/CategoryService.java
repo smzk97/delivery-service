@@ -4,14 +4,13 @@ package com.smzk.delivery_service.service;
 import com.baomidou.mybatisplus.spring.service.IService;
 import com.smzk.delivery_service.dto.CategoryInsertDTO;
 import com.smzk.delivery_service.dto.CategoryQueryPageDTO;
-import com.smzk.delivery_service.dto.CategoryUpdateDTO;
 import com.smzk.delivery_service.entity.Category;
 import com.smzk.delivery_service.vo.PageResultVO;
 
 import java.util.List;
 
 public interface CategoryService extends IService<Category> {
-    void categoryUpdate(CategoryUpdateDTO categoryUpdateDTO);
+    void categoryUpdate(CategoryInsertDTO categoryUpdateDTO);
 
     PageResultVO categoryQueryPage(CategoryQueryPageDTO categoryQueryPageDTO);
 

@@ -1,11 +1,10 @@
 package com.smzk.delivery_service.service;
 
 import com.baomidou.mybatisplus.spring.service.IService;
-import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.smzk.delivery_service.dto.DishInsertDTO;
 import com.smzk.delivery_service.dto.DishQueryPageDTO;
 import com.smzk.delivery_service.entity.Dish;
-import com.smzk.delivery_service.entity.DishQueryByIdVO;
+import com.smzk.delivery_service.vo.DishQueryByIdVO;
 import com.smzk.delivery_service.vo.PageResultVO;
 
 import java.util.List;

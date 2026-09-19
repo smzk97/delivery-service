@@ -2,11 +2,9 @@ package com.smzk.delivery_service.controller;
 
 import com.smzk.delivery_service.dto.CategoryInsertDTO;
 import com.smzk.delivery_service.dto.CategoryQueryPageDTO;
-import com.smzk.delivery_service.dto.CategoryUpdateDTO;
 import com.smzk.delivery_service.entity.Category;
 import com.smzk.delivery_service.entity.Result;
 import com.smzk.delivery_service.service.CategoryService;
-import com.smzk.delivery_service.service.EmployeeService;
 import com.smzk.delivery_service.vo.PageResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,7 @@ public class CategoryController {
     }
 
     @PutMapping
-    public Result categoryUpdate(@RequestBody CategoryUpdateDTO categoryUpdateDTO){
+    public Result categoryUpdate(@RequestBody CategoryInsertDTO categoryUpdateDTO){
         categoryService.categoryUpdate(categoryUpdateDTO);
         return Result.Success();
     }
