@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeQueryPageDTO extends Page {
+public class DishQueryPageDTO extends Page {
+    private Integer categoryId;
     private String name;
+    private Integer status;
 }
