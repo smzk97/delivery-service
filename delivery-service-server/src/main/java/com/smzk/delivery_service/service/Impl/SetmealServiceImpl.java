@@ -1,20 +1,29 @@
 package com.smzk.delivery_service.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.smzk.delivery_service.dto.MealInsertDTO;
+import com.smzk.delivery_service.dto.SetmealQueryPageDTO;
 import com.smzk.delivery_service.entity.Category;
 import com.smzk.delivery_service.entity.Setmeal;
 import com.smzk.delivery_service.entity.SetmealDish;
 import com.smzk.delivery_service.enums.ErrorCode;
 import com.smzk.delivery_service.exception.BusinessException;
 import com.smzk.delivery_service.service.SetmealService;
+import com.smzk.delivery_service.vo.PageResultVO;
 import com.smzk.delivery_service.vo.SetmealQueryByIdVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SetmealServiceImpl extends ServiceImpl<BaseMapper<Setmeal>,Setmeal> implements SetmealService {
@@ -51,5 +60,35 @@ public class SetmealServiceImpl extends ServiceImpl<BaseMapper<Setmeal>,Setmeal>
         setmealQueryByIdVO.setSetmealDishes(setmealDishes);
 
         return setmealQueryByIdVO;
+    }
+
+    @Override
+    public PageResultVO setmealQueryPage(SetmealQueryPageDTO setmealQueryPageDTO) {
+        IPage<Setmeal> iPage = new Page<>(setmealQueryPageDTO.getPage(),setmealQueryPageDTO.getPageSize());
+        LambdaQueryWrapper<Setmeal> lambdaQueryWrapper = new LambdaQueryWrapper<Setmeal>()
+                .select(Setmeal::getId)
+                .like(StringUtils.hasText(setmealQueryPageDTO.getName()),Setmeal::getName,setmealQueryPageDTO.getName())
+                .eq(setmealQueryPageDTO.getCategoryId() != null,Setmeal::getCategoryId,setmealQueryPageDTO.getCategoryId())
+                .eq(setmealQueryPageDTO.getStatus() != null,Setmeal::getStatus,setmealQueryPageDTO.getStatus());
+        IPage<Setmeal> lists = this.page(iPage,lambdaQueryWrapper);
+        List<Setmeal> meals = lists.getRecords();
+        if(CollectionUtils.isEmpty(meals)){
+            return new PageResultVO(lists.getTotal(),meals);
+        }
+        List<Integer> ids = meals.stream().map(Setmeal::getId).toList();
+        List<Setmeal> datas = this.listByIds(ids);
+        return new PageResultVO(lists.getTotal(),datas);
+    }
+
+    @Override
+    public void setmealConvertStatus(Integer status,Integer id) {
+        Setmeal setmeal = this.getById(id);
+        if(setmeal == null){
+            throw new BusinessException(ErrorCode.NOT_FOUND,"该套餐不存在");
+        }
+        Setmeal setmeal1 = Setmeal.builder().id(id).build();
+        if(!setmeal.getStatus().equals(id)){
+            this.update(setmeal1,new LambdaUpdateWrapper<Setmeal>().set(Setmeal::getStatus,status));
+        }
     }
 }
