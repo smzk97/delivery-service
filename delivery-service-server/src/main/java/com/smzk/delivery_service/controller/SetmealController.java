@@ -9,6 +9,8 @@ import com.smzk.delivery_service.vo.SetmealQueryByIdVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/setmeal")
 public class SetmealController {
@@ -41,6 +43,18 @@ public class SetmealController {
     @PutMapping("/status/{status}")
     public Result setmealConvertStatus(@PathVariable Integer status, Integer id){
         setmealService.setmealConvertStatus(status,id);
+        return Result.Success();
+    }
+
+    @DeleteMapping
+    public Result setmealDelete(@RequestParam List<Integer> ids){
+        setmealService.setmealDelete(ids);
+        return Result.Success();
+    }
+
+    @PutMapping
+    public Result setmealUpdate(@RequestBody MealInsertDTO mealInsertDTO){
+        setmealService.setmealUpdate(mealInsertDTO);
         return Result.Success();
     }
 }
