@@ -4,10 +4,6 @@ spring:
       - dev
   application:
     name: delivery-service-server
-  datasource:
-    url : "jdbc:mysql://localhost:3306/delivery_service"
-    password : 123456
-    username : root
 logging:
   file:
     name: ./app.log

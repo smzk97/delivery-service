@@ -1,25 +1,16 @@
-package com.smzk.delivery_service.controller;
+package com.smzk.delivery_service.controller.admin;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.smzk.delivery_service.dto.EmployeeEditPasswordDTO;
 import com.smzk.delivery_service.dto.EmployeeInsertDTO;
 import com.smzk.delivery_service.dto.EmployeeLoginDTO;
 import com.smzk.delivery_service.dto.EmployeeQueryPageDTO;
 import com.smzk.delivery_service.entity.Employee;
 import com.smzk.delivery_service.entity.Result;
-import com.smzk.delivery_service.utils.ThreadLocalUtils;
 import com.smzk.delivery_service.service.EmployeeService;
 import com.smzk.delivery_service.vo.PageResultVO;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin/employee")

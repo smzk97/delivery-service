@@ -1,4 +1,4 @@
-package com.smzk.delivery_service.controller;
+package com.smzk.delivery_service.controller.admin;
 
 import com.smzk.delivery_service.dto.CategoryInsertDTO;
 import com.smzk.delivery_service.dto.CategoryQueryPageDTO;
