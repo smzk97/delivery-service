@@ -2,11 +2,11 @@ package com.smzk.delivery_service.controller.admin;
 
 import com.smzk.delivery_service.dto.DishInsertDTO;
 import com.smzk.delivery_service.dto.DishQueryPageDTO;
-import com.smzk.delivery_service.entity.Dish;
-import com.smzk.delivery_service.vo.DishQueryByIdVO;
-import com.smzk.delivery_service.entity.Result;
-import com.smzk.delivery_service.service.DishService;
-import com.smzk.delivery_service.vo.PageResultVO;
+import com.smzk.delivery_service.entity.admin.Dish;
+import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
+import com.smzk.delivery_service.entity.admin.Result;
+import com.smzk.delivery_service.service.admin.DishService;
+import com.smzk.delivery_service.vo.admin.PageResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

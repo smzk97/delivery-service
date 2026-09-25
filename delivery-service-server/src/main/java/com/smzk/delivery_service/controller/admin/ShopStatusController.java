@@ -1,7 +1,7 @@
 package com.smzk.delivery_service.controller.admin;
 
 
-import com.smzk.delivery_service.entity.Result;
+import com.smzk.delivery_service.entity.admin.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;

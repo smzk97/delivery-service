@@ -2,10 +2,10 @@ package com.smzk.delivery_service.controller.admin;
 
 import com.smzk.delivery_service.dto.CategoryInsertDTO;
 import com.smzk.delivery_service.dto.CategoryQueryPageDTO;
-import com.smzk.delivery_service.entity.Category;
-import com.smzk.delivery_service.entity.Result;
-import com.smzk.delivery_service.service.CategoryService;
-import com.smzk.delivery_service.vo.PageResultVO;
+import com.smzk.delivery_service.entity.admin.Category;
+import com.smzk.delivery_service.entity.admin.Result;
+import com.smzk.delivery_service.service.admin.CategoryService;
+import com.smzk.delivery_service.vo.admin.PageResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.smzk.delivery_service.dto;
 
-import com.smzk.delivery_service.entity.Setmeal;
-import com.smzk.delivery_service.entity.SetmealDish;
+import com.smzk.delivery_service.entity.admin.Setmeal;
+import com.smzk.delivery_service.entity.admin.SetmealDish;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

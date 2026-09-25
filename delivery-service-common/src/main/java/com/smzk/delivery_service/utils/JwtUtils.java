@@ -36,6 +36,20 @@ public class JwtUtils {
                 .compact();
     }
 
+    public static String generateToken(String subject,Map<String,Object> extraClaims){
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+        Date expiration = new Date(nowMillis + EXPIRATION_TIME);
+
+        return Jwts.builder()
+                .claims(extraClaims)
+                .subject(subject)
+                .issuedAt(now)
+                .expiration(expiration)
+                .signWith(SECRET_KEY)
+                .compact();
+    }
+
     /**
      * 解析 Token 获取完整 Payload（Claims）
      * 校验失败或过期时会抛出异常

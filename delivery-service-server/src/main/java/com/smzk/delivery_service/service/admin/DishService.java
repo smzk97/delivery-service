@@ -1,0 +1,26 @@
+package com.smzk.delivery_service.service.admin;
+
+import com.baomidou.mybatisplus.spring.service.IService;
+import com.smzk.delivery_service.dto.DishInsertDTO;
+import com.smzk.delivery_service.dto.DishQueryPageDTO;
+import com.smzk.delivery_service.entity.admin.Dish;
+import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
+import com.smzk.delivery_service.vo.admin.PageResultVO;
+
+import java.util.List;
+
+public interface DishService extends IService<Dish> {
+    void dishInsert(DishInsertDTO dishInsertDTO);
+
+    void dishDelete(List<Integer> ids);
+
+    DishQueryByIdVO dishQueryById(Integer id);
+
+    List<Dish> dishQueryByCategoryId(Integer categoryId);
+
+    PageResultVO dishQueryPage(DishQueryPageDTO dishQueryPageDTO);
+
+    void dishConvertStatus(Integer status, Integer id);
+
+    void dishUpdate(DishInsertDTO dishUpdateDTO);
+}

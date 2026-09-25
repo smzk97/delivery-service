@@ -1,6 +1,6 @@
 package com.smzk.delivery_service.dto;
 
-import com.smzk.delivery_service.entity.DishFlavor;
+import com.smzk.delivery_service.entity.admin.DishFlavor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

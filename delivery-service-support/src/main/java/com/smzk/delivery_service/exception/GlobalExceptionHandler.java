@@ -1,11 +1,10 @@
 package com.smzk.delivery_service.exception;
 
 
-import com.smzk.delivery_service.entity.Result;
+import com.smzk.delivery_service.entity.admin.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 

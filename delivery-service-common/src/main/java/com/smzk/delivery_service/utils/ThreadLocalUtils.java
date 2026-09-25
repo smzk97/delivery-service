@@ -1,6 +1,6 @@
 package com.smzk.delivery_service.utils;
 
-import com.smzk.delivery_service.entity.EmployeeThreadLocal;
+import com.smzk.delivery_service.entity.admin.EmployeeThreadLocal;
 
 public class ThreadLocalUtils {
     private static final ThreadLocal<EmployeeThreadLocal> THREAD_LOCAL = new ThreadLocal<>();

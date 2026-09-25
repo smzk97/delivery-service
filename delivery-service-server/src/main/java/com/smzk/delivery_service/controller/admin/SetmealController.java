@@ -2,10 +2,10 @@ package com.smzk.delivery_service.controller.admin;
 
 import com.smzk.delivery_service.dto.MealInsertDTO;
 import com.smzk.delivery_service.dto.SetmealQueryPageDTO;
-import com.smzk.delivery_service.entity.Result;
-import com.smzk.delivery_service.service.SetmealService;
-import com.smzk.delivery_service.vo.PageResultVO;
-import com.smzk.delivery_service.vo.SetmealQueryByIdVO;
+import com.smzk.delivery_service.entity.admin.Result;
+import com.smzk.delivery_service.service.admin.SetmealService;
+import com.smzk.delivery_service.vo.admin.PageResultVO;
+import com.smzk.delivery_service.vo.admin.SetmealQueryByIdVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

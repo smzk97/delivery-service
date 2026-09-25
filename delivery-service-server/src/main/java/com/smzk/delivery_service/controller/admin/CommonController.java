@@ -1,8 +1,8 @@
 package com.smzk.delivery_service.controller.admin;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.smzk.delivery_service.entity.Result;
-import com.smzk.delivery_service.service.CommonService;
+import com.smzk.delivery_service.entity.admin.Result;
+import com.smzk.delivery_service.service.admin.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

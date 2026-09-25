@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smzk.delivery_service.mapper.EmployeeMapper">
-    <select id="employeeQueryPage" resultType="com.smzk.delivery_service.entity.Employee"
+<mapper namespace="com.smzk.delivery_service.mapper.admin.EmployeeMapper">
+    <select id="employeeQueryPage" resultType="com.smzk.delivery_service.entity.admin.Employee"
             parameterType="com.smzk.delivery_service.dto.EmployeeQueryPageDTO">
         select * from employee
         <where>

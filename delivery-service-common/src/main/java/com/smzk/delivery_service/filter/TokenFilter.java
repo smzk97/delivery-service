@@ -2,8 +2,8 @@ package com.smzk.delivery_service.filter;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.smzk.delivery_service.entity.EmployeeThreadLocal;
-import com.smzk.delivery_service.entity.Result;
+import com.smzk.delivery_service.entity.admin.EmployeeThreadLocal;
+import com.smzk.delivery_service.entity.admin.Result;
 import com.smzk.delivery_service.enums.ErrorCode;
 import com.smzk.delivery_service.utils.JwtUtils;
 import com.smzk.delivery_service.utils.ThreadLocalUtils;

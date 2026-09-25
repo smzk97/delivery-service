@@ -5,11 +5,10 @@ import com.aliyun.oss.common.auth.*;
 import com.aliyun.oss.common.comm.SignVersion;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
-import com.smzk.delivery_service.entity.OssConfig;
+import com.smzk.delivery_service.entity.admin.OssConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

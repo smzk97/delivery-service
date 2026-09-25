@@ -1,9 +1,9 @@
 package com.smzk.delivery_service;
 
-import com.smzk.delivery_service.entity.OssConfig;
+import com.smzk.delivery_service.entity.admin.OssConfig;
+import com.smzk.delivery_service.entity.user.LoginParam;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.server.servlet.context.ServletComponentScan;
@@ -11,7 +11,7 @@ import org.springframework.boot.web.server.servlet.context.ServletComponentScan;
 @SpringBootApplication
 @ServletComponentScan
 @MapperScan("com.smzk.delivery_service.mapper")
-@EnableConfigurationProperties(OssConfig.class)
+@EnableConfigurationProperties({OssConfig.class, LoginParam.class})
 public class DeliveryServiceServerApplication {
 
     public static void main(String[] args) {
