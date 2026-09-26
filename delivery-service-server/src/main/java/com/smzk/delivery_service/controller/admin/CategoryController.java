@@ -52,7 +52,6 @@ public class CategoryController {
     }
 
     @GetMapping("/list")
-
     public Result categoryQueryType(Integer type){
         List<Category> categories = categoryService.categoryQueryType(type);
         return Result.Success(categories);
