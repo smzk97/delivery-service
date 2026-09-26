@@ -9,4 +9,6 @@ import java.util.List;
 public interface DishService extends IService<Dish> {
 
     List<DishQueryByIdVO> dishQueryByCategoryId(Integer categoryId);
+
+    DishQueryByIdVO dishQueryById(Integer id);
 }

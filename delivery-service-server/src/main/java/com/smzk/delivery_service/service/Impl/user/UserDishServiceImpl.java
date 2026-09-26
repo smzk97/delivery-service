@@ -48,4 +48,20 @@ public class UserDishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> impl
         }).toList();
         return dishQueryByIdVOS;
     }
+
+    @Override
+    public DishQueryByIdVO dishQueryById(Integer id) {
+        Dish one = this.getOne(new LambdaQueryWrapper<Dish>().eq(Dish::getId, id));
+        if(one == null){
+            throw new BusinessException(ErrorCode.NOT_FOUND,"查询为空");
+        }
+        List<DishFlavor> list = Db.lambdaQuery(DishFlavor.class).eq(DishFlavor::getDishId,id).list();
+        Category byId = Db.getById(one.getCategoryId(), Category.class);
+        String categoryName = byId != null ? byId.getName() : null;
+        DishQueryByIdVO dishQueryByIdVO = new DishQueryByIdVO();
+        dishQueryByIdVO.setFlavors(list);
+        dishQueryByIdVO.setCategoryName(categoryName);
+        BeanUtils.copyProperties(one,dishQueryByIdVO);
+        return dishQueryByIdVO;
+    }
 }
