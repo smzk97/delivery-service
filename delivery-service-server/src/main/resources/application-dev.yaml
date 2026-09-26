@@ -24,6 +24,6 @@ spring:
 
 wx:
   config:
-    appid: "wxd3f33f213aea55a1"
-    secret: "4989eed486407db5f75bc956cf274cb6"
+    appid: 
+    secret:
     grant-type: "authorization_code"
