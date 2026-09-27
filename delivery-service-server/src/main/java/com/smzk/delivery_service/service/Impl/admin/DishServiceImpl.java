@@ -21,21 +21,28 @@ import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
 import com.smzk.delivery_service.vo.admin.PageResultVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class DishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implements DishService {
 
     private DishMapper dishMapper;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    public DishServiceImpl(DishMapper dishMapper){
+    public DishServiceImpl(DishMapper dishMapper,StringRedisTemplate stringRedisTemplate){
         this.dishMapper = dishMapper;
+        this.stringRedisTemplate = stringRedisTemplate;
     }
 
     @Override
@@ -44,6 +51,16 @@ public class DishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implemen
         Dish dish = new Dish();
         BeanUtils.copyProperties(dishInsertDTO,dish);
         this.save(dish);
+
+        Integer categoryID = dishInsertDTO.getCategoryId();
+        TransactionSynchronizationManager.registerSynchronization(
+                new TransactionSynchronization() {
+                    @Override
+                    public void afterCommit() {
+                        stringRedisTemplate.delete("dish_" + categoryID);
+                    }
+                }
+        );
 
         List<DishFlavor> flavors = dishInsertDTO.getFlavors();
         if(flavors.isEmpty()){
@@ -79,6 +96,16 @@ public class DishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implemen
         LambdaQueryWrapper<DishFlavor> wrapper = Wrappers.lambdaQuery(DishFlavor.class)
                 .in(DishFlavor::getDishId, ids);
         Db.remove(wrapper);
+        Set<Integer> set = dishes.stream().map(Dish::getCategoryId).collect(Collectors.toSet());
+        List<String> setLists = set.stream().map(s->{return "dish_" + s;}).toList();
+        TransactionSynchronizationManager.registerSynchronization(
+                new TransactionSynchronization() {
+                    @Override
+                    public void afterCommit() {
+                        stringRedisTemplate.delete(setLists);
+                    }
+                }
+        );
     }
 
     @Override
@@ -133,6 +160,9 @@ public class DishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implemen
             update.setStatus(status);
             this.updateById(update);
         }
+        Integer categoryId = dish.getCategoryId();
+        String key = "dish_" + categoryId;
+        stringRedisTemplate.delete(key);
     }
 
     @Override
@@ -150,5 +180,15 @@ public class DishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implemen
         Db.remove(Wrappers.lambdaQuery(DishFlavor.class).eq(DishFlavor::getDishId,id));
         flavors.forEach(flavor->flavor.setDishId(id));
         Db.saveBatch(flavors);
+
+        String key = "dish_" + dishUpdateDTO.getCategoryId();
+        TransactionSynchronizationManager.registerSynchronization(
+                new TransactionSynchronization() {
+                    @Override
+                    public void afterCommit() {
+                        stringRedisTemplate.delete(key);
+                    }
+                }
+        );
     }
 }

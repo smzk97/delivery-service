@@ -7,14 +7,20 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.smzk.delivery_service.entity.admin.Category;
 import com.smzk.delivery_service.entity.admin.Dish;
 import com.smzk.delivery_service.entity.admin.DishFlavor;
+import com.smzk.delivery_service.enums.DishStatus;
 import com.smzk.delivery_service.enums.ErrorCode;
 import com.smzk.delivery_service.exception.BusinessException;
 import com.smzk.delivery_service.service.user.DishService;
 import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +29,31 @@ import java.util.stream.Collectors;
 @Service
 public class UserDishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implements DishService {
 
+    private StringRedisTemplate stringRedisTemplate;
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Autowired
+    UserDishServiceImpl(StringRedisTemplate stringRedisTemplate){
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
 
     @Override
     public List<DishQueryByIdVO> dishQueryByCategoryId(Integer categoryId) {
         if(categoryId == null){
             throw new BusinessException(ErrorCode.PARAM_ERROR);
         }
-        List<Dish> dishes = this.list(new LambdaQueryWrapper<Dish>().eq(Dish::getCategoryId, categoryId));
+
+        String key = "dish_" + categoryId;
+        String json = stringRedisTemplate.opsForValue().get(key);
+        if(json != null && !json.isEmpty()){
+            List<DishQueryByIdVO> dishQueryByIdVOList = objectMapper.readValue(json, new TypeReference<List<DishQueryByIdVO>>() {});
+            if(CollectionUtils.isEmpty(dishQueryByIdVOList)){
+                return Collections.emptyList();
+            }
+            return dishQueryByIdVOList;
+        }
+
+        List<Dish> dishes = this.list(new LambdaQueryWrapper<Dish>().eq(Dish::getCategoryId, categoryId).eq(Dish::getStatus, DishStatus.OPEN));
         if(CollectionUtils.isEmpty(dishes)){
             return Collections.emptyList();
         }
@@ -46,12 +70,13 @@ public class UserDishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> impl
             dishQueryByIdVO.setFlavors(flavors.getOrDefault(dish.getId(), Collections.emptyList()));
             return dishQueryByIdVO;
         }).toList();
+        stringRedisTemplate.opsForValue().set(key,objectMapper.writeValueAsString(dishQueryByIdVOS), Duration.ofMinutes(30));
         return dishQueryByIdVOS;
     }
 
     @Override
     public DishQueryByIdVO dishQueryById(Integer id) {
-        Dish one = this.getOne(new LambdaQueryWrapper<Dish>().eq(Dish::getId, id));
+        Dish one = this.getOne(new LambdaQueryWrapper<Dish>().eq(Dish::getId, id).eq(Dish::getStatus,DishStatus.OPEN));
         if(one == null){
             throw new BusinessException(ErrorCode.NOT_FOUND,"查询为空");
         }
