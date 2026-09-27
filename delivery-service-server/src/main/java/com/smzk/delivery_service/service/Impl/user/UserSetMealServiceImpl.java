@@ -9,6 +9,7 @@ import com.smzk.delivery_service.entity.admin.SetmealDish;
 import com.smzk.delivery_service.enums.ErrorCode;
 import com.smzk.delivery_service.exception.BusinessException;
 import com.smzk.delivery_service.service.user.UserSetMealService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,12 @@ import java.util.List;
 public class UserSetMealServiceImpl extends ServiceImpl<BaseMapper<Setmeal>,Setmeal> implements UserSetMealService {
 
     @Override
+    @Cacheable(cacheNames = "setmeal",key = "#categoryId")
     public List<Setmeal> setmealQueryByCategoryId(Integer categoryId) {
         if(categoryId == null){
             throw new BusinessException(ErrorCode.PARAM_ERROR);
         }
-        List<Setmeal> setmeals = this.list(new LambdaQueryWrapper<Setmeal>().eq(Setmeal::getCategoryId,categoryId)).stream().toList();
+        List<Setmeal> setmeals = this.list(new LambdaQueryWrapper<Setmeal>().eq(Setmeal::getCategoryId,categoryId));
         return setmeals;
     }
 

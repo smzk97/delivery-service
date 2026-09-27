@@ -19,17 +19,33 @@ import com.smzk.delivery_service.service.admin.SetmealService;
 import com.smzk.delivery_service.vo.admin.PageResultVO;
 import com.smzk.delivery_service.vo.admin.SetmealQueryByIdVO;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SetmealServiceImpl extends ServiceImpl<BaseMapper<Setmeal>,Setmeal> implements SetmealService {
 
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    SetmealServiceImpl(StringRedisTemplate stringRedisTemplate){
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(cacheNames = "setmeal",key = "#mealInsertDTO.categoryId")
     public void setmealInsert(MealInsertDTO mealInsertDTO) {
         Setmeal setmeal = new Setmeal();
         BeanUtils.copyProperties(mealInsertDTO,setmeal);
@@ -90,6 +106,8 @@ public class SetmealServiceImpl extends ServiceImpl<BaseMapper<Setmeal>,Setmeal>
         Setmeal setmeal1 = Setmeal.builder().id(id).build();
         if(!setmeal.getStatus().equals(status)){
             this.update(setmeal1,new LambdaUpdateWrapper<Setmeal>().set(Setmeal::getStatus,status));
+            Integer categoryId = setmeal.getCategoryId();
+            stringRedisTemplate.delete("setmeal::" + categoryId);
         }
     }
 
@@ -108,14 +126,30 @@ public class SetmealServiceImpl extends ServiceImpl<BaseMapper<Setmeal>,Setmeal>
         });
         this.removeByIds(ids);
         Db.remove(Wrappers.lambdaQuery(SetmealDish.class).in(SetmealDish::getSetmealId,ids));
+
+        Set<Integer> collect = setmeals.stream().map(Setmeal::getCategoryId).collect(Collectors.toSet());
+        List<String> list = collect.stream().map(c -> {
+            return "setmeal::" + c;
+        }).toList();
+        TransactionSynchronizationManager.registerSynchronization(
+                new TransactionSynchronization() {
+                    @Override
+                    public void afterCommit() {
+                        stringRedisTemplate.delete(list);
+                    }
+                }
+        );
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void setmealUpdate(MealInsertDTO mealInsertDTO) {
         Integer id = mealInsertDTO.getId();
         if(id == null){
             throw new BusinessException(ErrorCode.PARAM_ERROR,"缺失id");
         }
+
+        Integer categoryId = this.getById(mealInsertDTO.getId()).getCategoryId();
 
         Setmeal setmeal = new Setmeal();
         BeanUtils.copyProperties(mealInsertDTO,setmeal);
@@ -128,5 +162,17 @@ public class SetmealServiceImpl extends ServiceImpl<BaseMapper<Setmeal>,Setmeal>
         }
         dishes.forEach(dish->dish.setSetmealId(id));
         Db.saveBatch(dishes);
+
+        TransactionSynchronizationManager.registerSynchronization(
+                new TransactionSynchronization() {
+                    @Override
+                    public void afterCommit() {
+                        stringRedisTemplate.delete(List.of(
+                                "setmeal::" + categoryId,
+                                "setmeal::" + mealInsertDTO.getCategoryId()
+                        ));
+                    }
+                }
+        );
     }
 }
