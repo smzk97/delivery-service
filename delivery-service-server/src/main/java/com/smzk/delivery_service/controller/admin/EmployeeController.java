@@ -1,9 +1,9 @@
 package com.smzk.delivery_service.controller.admin;
 
-import com.smzk.delivery_service.dto.EmployeeEditPasswordDTO;
-import com.smzk.delivery_service.dto.EmployeeInsertDTO;
-import com.smzk.delivery_service.dto.EmployeeLoginDTO;
-import com.smzk.delivery_service.dto.EmployeeQueryPageDTO;
+import com.smzk.delivery_service.dto.admin.EmployeeEditPasswordDTO;
+import com.smzk.delivery_service.dto.admin.EmployeeInsertDTO;
+import com.smzk.delivery_service.dto.admin.EmployeeLoginDTO;
+import com.smzk.delivery_service.dto.admin.EmployeeQueryPageDTO;
 import com.smzk.delivery_service.entity.admin.Employee;
 import com.smzk.delivery_service.entity.admin.Result;
 import com.smzk.delivery_service.service.admin.EmployeeService;

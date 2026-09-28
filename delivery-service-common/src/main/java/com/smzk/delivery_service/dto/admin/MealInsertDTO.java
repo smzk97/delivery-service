@@ -1,4 +1,4 @@
-package com.smzk.delivery_service.dto;
+package com.smzk.delivery_service.dto.admin;
 
 import com.smzk.delivery_service.entity.admin.Setmeal;
 import com.smzk.delivery_service.entity.admin.SetmealDish;

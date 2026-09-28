@@ -1,19 +1,33 @@
 package com.smzk.delivery_service.utils;
 
 import com.smzk.delivery_service.entity.admin.EmployeeThreadLocal;
+import com.smzk.delivery_service.entity.user.UserThreadLocal;
 
 public class ThreadLocalUtils {
-    private static final ThreadLocal<EmployeeThreadLocal> THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<EmployeeThreadLocal> EMPLOYEE_THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<UserThreadLocal> USER_THREAD_LOCAL = new ThreadLocal<>();
 
     public static EmployeeThreadLocal getEmployee(){
-        return THREAD_LOCAL.get();
+        return EMPLOYEE_THREAD_LOCAL.get();
     }
 
     public static void setEmployee(EmployeeThreadLocal employeeThreadLocal){
-        THREAD_LOCAL.set(employeeThreadLocal);
+        EMPLOYEE_THREAD_LOCAL.set(employeeThreadLocal);
     }
 
     public static void removeEmployee(){
-        THREAD_LOCAL.remove();
+        EMPLOYEE_THREAD_LOCAL.remove();
+    }
+
+    public static UserThreadLocal getUser(){
+        return USER_THREAD_LOCAL.get();
+    }
+
+    public static void setUser(UserThreadLocal userThreadLocal){
+        USER_THREAD_LOCAL.set(userThreadLocal);
+    }
+
+    public static void removeUser(){
+        USER_THREAD_LOCAL.remove();
     }
 }

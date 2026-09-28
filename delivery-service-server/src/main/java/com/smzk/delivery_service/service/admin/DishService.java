@@ -1,8 +1,8 @@
 package com.smzk.delivery_service.service.admin;
 
 import com.baomidou.mybatisplus.spring.service.IService;
-import com.smzk.delivery_service.dto.DishInsertDTO;
-import com.smzk.delivery_service.dto.DishQueryPageDTO;
+import com.smzk.delivery_service.dto.admin.DishInsertDTO;
+import com.smzk.delivery_service.dto.admin.DishQueryPageDTO;
 import com.smzk.delivery_service.entity.admin.Dish;
 import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
 import com.smzk.delivery_service.vo.admin.PageResultVO;

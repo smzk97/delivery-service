@@ -47,17 +47,20 @@ public class UserServiceImpl extends ServiceImpl<BaseMapper<User>,User> implemen
             throw new BusinessException(ErrorCode.PARAM_ERROR,loginResponse.getErrmsg());
         }
         Map<String,Object> claims = new HashMap<>();
-        claims.put("secret_key",loginResponse.getSecretKey());
         claims.put("openid",loginResponse.getOpenid());
-        String token = JwtUtils.generateToken(loginResponse.getOpenid(),claims,24L*60*60*30*1000);
 
+        Integer id = null;
         User user = this.getOne(new LambdaQueryWrapper<User>().eq(User::getOpenid,loginResponse.getOpenid()));
         if(ObjectUtils.isEmpty(user)){
             User users = User.builder()
                     .openid(loginResponse.getOpenid())
                     .build();
             this.save(users);
+            id = users.getId();
         }
+        id = id == null ? user.getId() : id;
+        claims.put("id", id);
+        String token = JwtUtils.generateToken(loginResponse.getSecretKey(),claims,24L*60*60*30*1000);
 
         LoginVO loginVO = LoginVO.builder()
                 .openid(loginResponse.getOpenid())

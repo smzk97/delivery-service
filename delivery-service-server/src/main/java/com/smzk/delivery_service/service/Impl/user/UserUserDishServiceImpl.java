@@ -10,7 +10,7 @@ import com.smzk.delivery_service.entity.admin.DishFlavor;
 import com.smzk.delivery_service.enums.DishStatus;
 import com.smzk.delivery_service.enums.ErrorCode;
 import com.smzk.delivery_service.exception.BusinessException;
-import com.smzk.delivery_service.service.user.DishService;
+import com.smzk.delivery_service.service.user.UserDishService;
 import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class UserDishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implements DishService {
+public class UserUserDishServiceImpl extends ServiceImpl<BaseMapper<Dish>,Dish> implements UserDishService {
 
     private StringRedisTemplate stringRedisTemplate;
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    UserDishServiceImpl(StringRedisTemplate stringRedisTemplate){
+    UserUserDishServiceImpl(StringRedisTemplate stringRedisTemplate){
         this.stringRedisTemplate = stringRedisTemplate;
     }
 

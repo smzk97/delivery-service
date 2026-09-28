@@ -1,4 +1,4 @@
-package com.smzk.delivery_service.dto;
+package com.smzk.delivery_service.dto.admin;
 
 import com.smzk.delivery_service.entity.admin.Page;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DishQueryPageDTO extends Page {
-    private Integer categoryId;
+public class EmployeeQueryPageDTO extends Page {
     private String name;
-    private Integer status;
 }

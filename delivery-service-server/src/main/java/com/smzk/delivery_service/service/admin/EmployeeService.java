@@ -1,7 +1,10 @@
 package com.smzk.delivery_service.service.admin;
 
 import com.baomidou.mybatisplus.spring.service.IService;
-import com.smzk.delivery_service.dto.*;
+import com.smzk.delivery_service.dto.admin.EmployeeEditPasswordDTO;
+import com.smzk.delivery_service.dto.admin.EmployeeInsertDTO;
+import com.smzk.delivery_service.dto.admin.EmployeeLoginDTO;
+import com.smzk.delivery_service.dto.admin.EmployeeQueryPageDTO;
 import com.smzk.delivery_service.entity.admin.Employee;
 import com.smzk.delivery_service.entity.admin.Result;
 import com.smzk.delivery_service.vo.admin.PageResultVO;

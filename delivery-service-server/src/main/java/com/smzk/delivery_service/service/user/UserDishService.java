@@ -6,7 +6,7 @@ import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
 
 import java.util.List;
 
-public interface DishService extends IService<Dish> {
+public interface UserDishService extends IService<Dish> {
 
     List<DishQueryByIdVO> dishQueryByCategoryId(Integer categoryId);
 

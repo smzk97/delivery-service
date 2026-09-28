@@ -1,4 +1,4 @@
-package com.smzk.delivery_service.dto;
+package com.smzk.delivery_service.dto.admin;
 
 import com.smzk.delivery_service.entity.admin.Page;
 import lombok.AllArgsConstructor;

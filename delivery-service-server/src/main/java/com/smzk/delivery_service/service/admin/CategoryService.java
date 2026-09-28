@@ -2,8 +2,8 @@ package com.smzk.delivery_service.service.admin;
 
 
 import com.baomidou.mybatisplus.spring.service.IService;
-import com.smzk.delivery_service.dto.CategoryInsertDTO;
-import com.smzk.delivery_service.dto.CategoryQueryPageDTO;
+import com.smzk.delivery_service.dto.admin.CategoryInsertDTO;
+import com.smzk.delivery_service.dto.admin.CategoryQueryPageDTO;
 import com.smzk.delivery_service.entity.admin.Category;
 import com.smzk.delivery_service.vo.admin.PageResultVO;
 

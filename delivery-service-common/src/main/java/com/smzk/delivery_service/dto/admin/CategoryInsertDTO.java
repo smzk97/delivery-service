@@ -1,14 +1,17 @@
-package com.smzk.delivery_service.dto;
+package com.smzk.delivery_service.dto.admin;
 
-import com.smzk.delivery_service.entity.admin.Page;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryQueryPageDTO extends Page{
+@Builder
+public class CategoryInsertDTO {
+    private Integer id;
     private String name;
+    private Integer sort;
     private Integer type;
 }

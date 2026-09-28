@@ -1,7 +1,7 @@
 package com.smzk.delivery_service.controller.admin;
 
-import com.smzk.delivery_service.dto.MealInsertDTO;
-import com.smzk.delivery_service.dto.SetmealQueryPageDTO;
+import com.smzk.delivery_service.dto.admin.MealInsertDTO;
+import com.smzk.delivery_service.dto.admin.SetmealQueryPageDTO;
 import com.smzk.delivery_service.entity.admin.Result;
 import com.smzk.delivery_service.service.admin.SetmealService;
 import com.smzk.delivery_service.vo.admin.PageResultVO;
