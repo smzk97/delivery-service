@@ -24,10 +24,9 @@ import java.util.List;
 @Service
 public class UserShoppingCartServiceImpl extends ServiceImpl<BaseMapper<ShoppingCart>,ShoppingCart> implements UserShoppingCartService {
 
-    private UserThreadLocal user = ThreadLocalUtils.getUser();
-
     @Override
     public void shoppingCartInsert(ShoppingCartInsertDTO shoppingCartInsertDTO) {
+        UserThreadLocal user = ThreadLocalUtils.getUser();
         Integer dishId = shoppingCartInsertDTO.getDishId();
         Integer setmealId = shoppingCartInsertDTO.getSetmealId();
         log.info("dishId:{},setmealId:{}",dishId,setmealId);
@@ -74,6 +73,8 @@ public class UserShoppingCartServiceImpl extends ServiceImpl<BaseMapper<Shopping
 
     @Override
     public List<ShoppingCart> shoppingCartQuery() {
+        UserThreadLocal user = ThreadLocalUtils.getUser();
+        log.info("上下文：{}",user);
         Integer user_id = user.getId();
         List<ShoppingCart> list = this.list(new LambdaQueryWrapper<ShoppingCart>().eq(ShoppingCart::getUserId, user_id));
         return list;
@@ -81,12 +82,14 @@ public class UserShoppingCartServiceImpl extends ServiceImpl<BaseMapper<Shopping
 
     @Override
     public void shoppingCartClean() {
+        UserThreadLocal user = ThreadLocalUtils.getUser();
         Integer user_id = user.getId();
         this.remove(new LambdaQueryWrapper<ShoppingCart>().eq(ShoppingCart::getUserId,user_id));
     }
 
     @Override
     public void shoppingCartSub(ShoppingCartInsertDTO shoppingCartInsertDTO) {
+        UserThreadLocal user = ThreadLocalUtils.getUser();
         Integer user_id = user.getId();
         LambdaQueryWrapper<ShoppingCart> wrapper = new LambdaQueryWrapper<ShoppingCart>().eq(ShoppingCart::getUserId, user_id)
                 .eq(shoppingCartInsertDTO.getDishId() != null, ShoppingCart::getDishId, shoppingCartInsertDTO.getDishId())
@@ -94,6 +97,10 @@ public class UserShoppingCartServiceImpl extends ServiceImpl<BaseMapper<Shopping
         ShoppingCart one = this.getOne(wrapper);
         if(one == null){
             throw new BusinessException(ErrorCode.NOT_FOUND,"该菜品或套餐不存在");
+        }
+        Integer number = one.getNumber();
+        if(number == 1){
+            this.removeById(one.getId());
         }
         one.setNumber(one.getNumber() - 1);
         this.update(one,wrapper);

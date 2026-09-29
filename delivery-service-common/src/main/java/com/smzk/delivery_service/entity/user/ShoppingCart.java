@@ -24,8 +24,6 @@ public class ShoppingCart {
     private String dishFlavor;
     private Integer number;
     private BigDecimal amount;
-    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 }

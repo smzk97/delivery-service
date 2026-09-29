@@ -59,7 +59,7 @@ public class UserAuthFilter implements Filter {
             ThreadLocalUtils.setUser(userThreadLocal);
             chain.doFilter(request,response);
         }catch(Exception e){
-            log.error("token解析异常，{}",e.getMessage());
+            log.error("authorization解析异常，{}",e.getMessage());
             httpServletResponse.setStatus(ErrorCode.UNAUTHORIZED.getCode());
             httpServletResponse.setContentType("application/json;charset=UTF-8");
             httpServletResponse.getWriter().write(objectMapper.writeValueAsString(Result.Failed(e.getMessage())));
