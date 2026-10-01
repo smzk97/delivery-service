@@ -16,7 +16,7 @@ import com.smzk.delivery_service.enums.ErrorCode;
 import com.smzk.delivery_service.vo.admin.EmployeeLoginVO;
 import com.smzk.delivery_service.mapper.admin.EmployeeMapper;
 import com.smzk.delivery_service.service.admin.EmployeeService;
-import com.smzk.delivery_service.exception.BusinessException;
+import com.smzk.delivery_service.BusinessException;
 import com.smzk.delivery_service.vo.admin.PageResultVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

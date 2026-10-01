@@ -1,22 +1,19 @@
 package com.smzk.delivery_service.service.Impl.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.smzk.delivery_service.entity.user.LoginParam;
 import com.smzk.delivery_service.entity.user.LoginResponse;
 import com.smzk.delivery_service.entity.user.User;
 import com.smzk.delivery_service.enums.ErrorCode;
-import com.smzk.delivery_service.exception.BusinessException;
+import com.smzk.delivery_service.BusinessException;
 import com.smzk.delivery_service.service.user.UserService;
 import com.smzk.delivery_service.utils.HttpUtils;
 import com.smzk.delivery_service.utils.JwtUtils;
 import com.smzk.delivery_service.vo.user.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;

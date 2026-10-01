@@ -92,6 +92,45 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <!-- 契约文件位置 -->
+                            <inputSpec>${project.basedir}/src/main/resources/api/user-api.yaml</inputSpec>
+                            <!-- 代码生成生成器类型 -->
+                            <generatorName>spring</generatorName>
+
+                            <!-- 控制只生成 DTO 模型，不自动生成 Controller 接口 -->
+                            <generateApis>false</generateApis>
+                            <generateModels>true</generateModels>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+
+                            <!-- 生成代码的包名 -->
+                            <modelPackage>com.example.demo.dto</modelPackage>
+
+                            <configOptions>
+                                <!-- Spring Boot 3 使用 jakarta 注解，Boot 2 设为 false -->
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <!-- 开启 JSR 380 (Bean Validation) 注解生成 -->
+                                <useBeanValidation>true</useBeanValidation>
+                                <!-- 禁用 JsonNullable 包装类，生成原生类型 -->
+                                <openApiNullable>false</openApiNullable>
+                                <!-- 日期时间类型使用 Java 8 LocalDate/LocalDateTime -->
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

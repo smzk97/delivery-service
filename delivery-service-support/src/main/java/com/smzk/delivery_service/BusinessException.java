@@ -1,4 +1,4 @@
-package com.smzk.delivery_service.exception;
+package com.smzk.delivery_service;
 
 import com.smzk.delivery_service.enums.ErrorCode;
 

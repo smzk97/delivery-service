@@ -1,0 +1,56 @@
+openapi: 3.0.1
+info:
+  title: 默认模块
+  description: ''
+  version: 1.0.0
+tags: []
+paths:
+  /user/addressBook:
+    delete:
+      summary: 删除地址（地址id）
+      deprecated: false
+      description: ''
+      tags: []
+      parameters:
+        - name: id
+          in: query
+          description: ''
+          required: false
+          example: '5'
+          schema:
+            type: string
+        - name: token
+          in: header
+          description: ''
+          example: >-
+            eyJhbGciOiJIUzUxMiJ9.eyJzdGF0dXMiOjEsIm5hbWUiOiLnrqHnkIblkZgtMeWPtyIsImlkIjoxLCJ1c2VyTmFtZSI6InJvb3QxIiwic3ViIjoicm9vdDEiLCJpYXQiOjE3ODk1NDMxOTcsImV4cCI6MTc5MjEzNTE5N30.mdxapQycTdKU0_7pB7WncEucyC0v1XPFnqB5ARXHviiH6s7YOmy3m1Cm3pdlWMSEGK4wocw1Qpd3px0pkYNwNg
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: ''
+          example: >-
+            eyJhbGciOiJIUzUxMiJ9.eyJvcGVuaWQiOiJvQnhyb3hiVFJqclQ1NThzLTFfSFh6Y2pyNmJ3IiwiaWQiOjIsImlhdCI6MTc5MDU4OTc2OCwiZXhwIjoxNzkzMTgxNzY4fQ.vX-7qzstIc6mh2MPHzrClQ0BHf1iZU9q9SorSGdL5OnB6T4hpeOJG4mAFLP0qDOYyNo0ec5L24cMuQOvLgoRIQ
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              example:
+                code: 1
+                data: null
+                msg: 成功
+      security: []
+components:
+  schemas: {}
+  responses: {}
+  securitySchemes: {}
+servers:
+  - url: localhost:8081
+    description: 开发环境
+security: []

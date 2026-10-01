@@ -9,7 +9,7 @@ import com.smzk.delivery_service.entity.admin.Dish;
 import com.smzk.delivery_service.entity.admin.DishFlavor;
 import com.smzk.delivery_service.enums.DishStatus;
 import com.smzk.delivery_service.enums.ErrorCode;
-import com.smzk.delivery_service.exception.BusinessException;
+import com.smzk.delivery_service.BusinessException;
 import com.smzk.delivery_service.service.user.UserDishService;
 import com.smzk.delivery_service.vo.admin.DishQueryByIdVO;
 import org.springframework.beans.BeanUtils;

@@ -14,7 +14,7 @@ import com.smzk.delivery_service.entity.admin.Category;
 import com.smzk.delivery_service.entity.admin.Setmeal;
 import com.smzk.delivery_service.entity.admin.SetmealDish;
 import com.smzk.delivery_service.enums.ErrorCode;
-import com.smzk.delivery_service.exception.BusinessException;
+import com.smzk.delivery_service.BusinessException;
 import com.smzk.delivery_service.service.admin.SetmealService;
 import com.smzk.delivery_service.vo.admin.PageResultVO;
 import com.smzk.delivery_service.vo.admin.SetmealQueryByIdVO;

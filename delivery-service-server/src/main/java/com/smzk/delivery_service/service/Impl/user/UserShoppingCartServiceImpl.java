@@ -1,7 +1,6 @@
 package com.smzk.delivery_service.service.Impl.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
@@ -9,10 +8,9 @@ import com.smzk.delivery_service.dto.user.ShoppingCartInsertDTO;
 import com.smzk.delivery_service.entity.admin.Dish;
 import com.smzk.delivery_service.entity.admin.Setmeal;
 import com.smzk.delivery_service.entity.user.ShoppingCart;
-import com.smzk.delivery_service.entity.user.User;
 import com.smzk.delivery_service.entity.user.UserThreadLocal;
 import com.smzk.delivery_service.enums.ErrorCode;
-import com.smzk.delivery_service.exception.BusinessException;
+import com.smzk.delivery_service.BusinessException;
 import com.smzk.delivery_service.service.user.UserShoppingCartService;
 import com.smzk.delivery_service.utils.ThreadLocalUtils;
 import lombok.extern.slf4j.Slf4j;

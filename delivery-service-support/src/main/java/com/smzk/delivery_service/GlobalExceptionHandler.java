@@ -1,8 +1,7 @@
-package com.smzk.delivery_service.exception;
+package com.smzk.delivery_service;
 
 
 import com.smzk.delivery_service.entity.admin.Result;
-import com.smzk.delivery_service.enums.ErrorCode;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;

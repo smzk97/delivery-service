@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.spring.service.impl.ServiceImpl;
 import com.smzk.delivery_service.entity.admin.Setmeal;
 import com.smzk.delivery_service.entity.admin.SetmealDish;
 import com.smzk.delivery_service.enums.ErrorCode;
-import com.smzk.delivery_service.exception.BusinessException;
+import com.smzk.delivery_service.BusinessException;
 import com.smzk.delivery_service.service.user.UserSetMealService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

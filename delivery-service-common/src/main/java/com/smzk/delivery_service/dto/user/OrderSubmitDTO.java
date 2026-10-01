@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 public class OrderSubmitDTO {
     private Integer addressBookId;
     private BigDecimal amount;
-    private Integer orderStatus;
-    private LocalDateTime estimatedDeliveryTime;
+    private Integer deliveryStatus;
+    private String estimatedDeliveryTime;
     private BigDecimal packAmount;
     private Integer payMethod;
     private String remark;

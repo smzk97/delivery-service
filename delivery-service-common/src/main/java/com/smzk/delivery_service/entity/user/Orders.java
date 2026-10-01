@@ -1,5 +1,6 @@
 package com.smzk.delivery_service.entity.user;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +12,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Orders {
-    private Long id;
+    private Integer id;
     private String number;
     private Integer status;
-    private Long userId;
-    private Long addressBookId;
+    private Integer userId;
+    private Integer addressBookId;
     private LocalDateTime orderTime;
     private LocalDateTime checkoutTime;
     private Integer payMethod;
