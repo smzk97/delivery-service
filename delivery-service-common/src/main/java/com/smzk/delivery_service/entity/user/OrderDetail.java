@@ -21,4 +21,5 @@ public class OrderDetail {
     private String dishFlavor;
     private Integer number;
     private BigDecimal amount;
+    private Integer status;
 }
